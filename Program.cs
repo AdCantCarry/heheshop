@@ -8,7 +8,7 @@ builder.Services.AddDbContext<HeheDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HeheDb")));
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSession();
 var app = builder.Build();
 
 // ✅ Chỉ migrate, không gọi Seed lại

@@ -1,0 +1,94 @@
+@model heheshop.Models.Product
+@{
+    ViewData["Title"] = "Thêm sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thêm sản phẩm mới</h2>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Tên sản phẩm</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Mô tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Giá</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Stock" class="form-label">Tồn kho</label>
+        <input asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Thumbnail</label>
+        <input type="file" name="thumbnailFile" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ảnh chi tiết</label>
+        <input type="file" name="imageFiles" multiple class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BrandId" class="form-label">Thương hiệu</label>
+        <select asp-for="BrandId" asp-items="@(new SelectList(ViewBag.Brands, "Id", "Name"))" class="form-select">
+            <option value="">-- Chọn thương hiệu --</option>
+        </select>
+        <span asp-validation-for="BrandId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Danh mục</label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" class="form-select">
+            <option value="">-- Chọn danh mục --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <hr />
+    <h5>Biến thể sản phẩm (Size & Color)</h5>
+    <div id="variantContainer"></div>
+    <button type="button" class="btn btn-secondary mb-3" onclick="addVariant()">+ Thêm biến thể</button>
+
+    <button type="submit" class="btn btn-primary">Lưu</button>
+</form>
+
+@section Scripts {
+    <script>
+        function addVariant() {
+            const container = document.getElementById('variantContainer');
+            const index = container.children.length;
+
+            const variantDiv = document.createElement('div');
+            variantDiv.className = 'mb-3 row';
+
+            variantDiv.innerHTML = `
+                <div class="col-md-3">
+                    <input name="Variants[${index}].Size" class="form-control" placeholder="Size" />
+                </div>
+                <div class="col-md-3">
+                    <input name="Variants[${index}].Color" class="form-control" placeholder="Màu" />
+                </div>
+                <div class="col-md-3">
+                    <input name="Variants[${index}].Stock" type="number" class="form-control" placeholder="Số lượng" />
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger" onclick="this.parentElement.parentElement.remove()">X</button>
+                </div>
+            `;
+            container.appendChild(variantDiv);
+        }
+    </script>
+}

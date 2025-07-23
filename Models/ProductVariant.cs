@@ -1,3 +1,4 @@
+namespace heheshop.Models;
 public class ProductVariant
 {
     public int Id { get; set; }

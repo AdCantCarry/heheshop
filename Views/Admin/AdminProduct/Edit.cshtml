@@ -1,0 +1,82 @@
+@model heheshop.Models.Product
+@{
+    ViewData["Title"] = "Sửa sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Sửa sản phẩm</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Tên sản phẩm</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Mô tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Giá</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Stock" class="form-label">Tồn kho</label>
+        <input asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Thumbnail</label>
+        <input type="file" name="thumbnailFile" class="form-control" />
+        <img src="@Model.ThumbnailUrl" width="100" class="mt-2" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ảnh chi tiết mới</label>
+        <input type="file" name="imageFiles" multiple class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BrandId" class="form-label">Thương hiệu</label>
+        <select asp-for="BrandId" asp-items="@(new SelectList(ViewBag.Brands, "Id", "Name", Model.BrandId))" class="form-select">
+            <option value="">-- Chọn thương hiệu --</option>
+        </select>
+        <span asp-validation-for="BrandId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Danh mục</label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name", Model.CategoryId))" class="form-select">
+            <option value="">-- Chọn danh mục --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <hr />
+    <h5>Biến thể sản phẩm hiện tại</h5>
+    @for (int i = 0; i < Model.Variants.Count; i++)
+    {
+        <div class="row mb-3">
+            <input type="hidden" name="Variants[@i].Id" value="@Model.Variants.ElementAt(i).Id" />
+            <div class="col-md-3">
+                <input name="Variants[@i].Size" value="@Model.Variants.ElementAt(i).Size" class="form-control" placeholder="Size" />
+            </div>
+            <div class="col-md-3">
+                <input name="Variants[@i].Color" value="@Model.Variants.ElementAt(i).Color" class="form-control" placeholder="Màu" />
+            </div>
+            <div class="col-md-3">
+                <input name="Variants[@i].Stock" value="@Model.Variants.ElementAt(i).Stock" class="form-control" placeholder="Số lượng" />
+            </div>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+</form>

@@ -1,16 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using heheshop.Data;
 
-public class AdminDashboardController : Controller
+namespace heheshop.Controllers;
+
+public class AdminController : Controller
 {
     private readonly HeheDbContext _context;
 
-    public AdminDashboardController(HeheDbContext context)
+    public AdminController(HeheDbContext context)
     {
         _context = context;
     }
 
-    public IActionResult Index()
+    public IActionResult Dashboard()
     {
         var role = HttpContext.Session.GetString("Role");
         if (role != "Admin")
@@ -20,6 +22,6 @@ public class AdminDashboardController : Controller
         ViewBag.TotalOrders = _context.Orders.Count();
         ViewBag.TotalProducts = _context.Products.Count();
 
-        return View();
+        return View(); // sẽ tự tìm Views/Admin/Dashboard.cshtml nếu bạn để mặc định
     }
 }

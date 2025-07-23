@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using heheshop.Models;
-
+namespace heheshop.Models;
 public class Address
 {
     public int Id { get; set; }

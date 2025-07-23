@@ -16,7 +16,7 @@ namespace heheshop.Middleware
         {
             var path = context.Request.Path.ToString().ToLower();
 
-            var userRole = context.Session.GetString("UserRole");
+            var userRole = context.Session.GetString("Role");
 
             // Chặn truy cập /admin nếu không phải Admin
             if (path.StartsWith("/admin") && userRole != "Admin")

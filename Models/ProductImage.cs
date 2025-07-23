@@ -1,3 +1,4 @@
+namespace heheshop.Models;
 public class ProductImage
 {
     public int Id { get; set; }

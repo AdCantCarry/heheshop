@@ -1,0 +1,37 @@
+@model List<heheshop.Models.Product>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý sản phẩm";
+}
+<h2>Danh sách sản phẩm</h2>
+
+<a href="/AdminProduct/Create" class="btn btn-primary mb-3">Thêm sản phẩm</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Kho</th>
+            <th>Thương hiệu</th>
+            <th>Danh mục</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Price.ToString("N0")</td>
+                <td>@p.Stock</td>
+                <td>@p.Brand?.Name</td>
+                <td>@p.Category?.Name</td>
+                <td>
+                    <a href="/AdminProduct/Edit/@p.Id" class="btn btn-sm btn-warning">Sửa</a>
+                    <a href="/AdminProduct/Delete/@p.Id" class="btn btn-sm btn-danger" onclick="return confirm('Xóa sản phẩm này?')">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

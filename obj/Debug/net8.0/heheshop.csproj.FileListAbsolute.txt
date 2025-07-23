@@ -136,3 +136,4 @@ C:\Users\Acer\heheshop\obj\Debug\net8.0\refint\heheshop.dll
 C:\Users\Acer\heheshop\obj\Debug\net8.0\heheshop.pdb
 C:\Users\Acer\heheshop\obj\Debug\net8.0\heheshop.genruntimeconfig.cache
 C:\Users\Acer\heheshop\obj\Debug\net8.0\ref\heheshop.dll
+C:\Users\Acer\heheshop\bin\Debug\net8.0\BCrypt.Net-Next.dll

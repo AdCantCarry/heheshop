@@ -1,0 +1,17 @@
+@model heheshop.Models.Brand
+@{
+    ViewData["Title"] = "Thêm Thương hiệu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thêm Thương hiệu</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Tên thương hiệu</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Thêm</button>
+    <a href="/AdminBrand" class="btn btn-secondary">Quay lại</a>
+</form>

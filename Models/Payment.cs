@@ -1,3 +1,4 @@
+namespace heheshop.Models;
 public class Payment
 {
     public int Id { get; set; }

@@ -1,3 +1,4 @@
+namespace heheshop.Models;
 public class CartItem
 {
     public int Id { get; set; }

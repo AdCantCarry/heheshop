@@ -1,5 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using heheshop.Models;
+namespace heheshop.Models;
 
 public class User
 {

@@ -1,0 +1,31 @@
+@model heheshop.Models.User
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <h2 class="mb-4">Tạo tài khoản</h2>
+
+    <form asp-action="Register" method="post">
+        <div class="mb-3">
+            <label class="form-label">Tên đăng nhập</label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" type="email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mật khẩu</label>
+            <input name="PasswordHash" class="form-control" type="password" />
+            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+    </form>
+</div>

@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-white mb-4">👑 Admin Dashboard</h2>
+
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-white shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Người dùng</h5>
+                    <p class="display-5">@ViewBag.TotalUsers</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-white shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Đơn hàng</h5>
+                    <p class="display-5">@ViewBag.TotalOrders</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-white shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Sản phẩm</h5>
+                    <p class="display-5">@ViewBag.TotalProducts</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center">
+        <a href="/Admin/AdminProduct" class="btn btn-light btn-lg rounded-pill">Quản lý sản phẩm</a>
+    </div>
+</div>

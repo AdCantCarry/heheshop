@@ -1,3 +1,4 @@
+namespace heheshop.Models;
 public class DiscountCode
 {
     public int Id { get; set; }
