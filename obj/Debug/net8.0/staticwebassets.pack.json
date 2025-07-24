@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\heheshop.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\css\\create-product.css",
+      "PackagePath": "staticwebassets\\css\\create-product.css"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\css\\home.css",
+      "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\css\\product.css",
+      "PackagePath": "staticwebassets\\css\\product.css"
+    },
+    {
       "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -243,6 +255,14 @@
     {
       "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\uploads\\04151c0e-37d5-4a68-abe9-08335586f0d5.jpg",
+      "PackagePath": "staticwebassets\\uploads\\04151c0e-37d5-4a68-abe9-08335586f0d5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Acer\\heheshop\\wwwroot\\uploads\\0aee1b28-005f-4ecf-98d5-053137a7955b.jpg",
+      "PackagePath": "staticwebassets\\uploads\\0aee1b28-005f-4ecf-98d5-053137a7955b.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.heheshop.props",

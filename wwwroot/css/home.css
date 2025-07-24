@@ -1,15 +1,4 @@
-﻿@model List<heheshop.Models.Product>
-
-@{
-    ViewData["Title"] = "Trang chủ";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<!-- AOS CSS -->
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-
-<style>
-    body {
+  body {
         background: radial-gradient(circle at top, #090979, #020024);
     }
 
@@ -86,15 +75,6 @@
     }
 
     /* Product Cards */
-    .card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 1rem;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-    }
 
     .card:hover {
         transform: translateY(-5px);
@@ -154,7 +134,7 @@
     }
 
     /* Responsive Design */
-    media (max-width: 768px) {
+    @media (max-width: 768px) {
         .hero-section {
             min-height: 50vh;
         }
@@ -176,7 +156,7 @@
         }
     }
 
-    media (max-width: 576px) {
+    @media (max-width: 576px) {
         .hero-content h1 {
             font-size: 2rem;
         }
@@ -190,47 +170,3 @@
             height: 180px;
         }
     }
-</style>
-
-<!-- Hero Section -->
-<section class="hero-section" data-aos="fade-down" data-aos-duration="1200">
-    <div class="hero-content">
-        <h1>Chào Mừng Đến Với HeheShop!</h1>
-        <p>Khám phá bộ sưu tập giày thời thượng, chất lượng hàng đầu, phù hợp với mọi phong cách.</p>
-        <a class="btn" href="/products">Khám Phá Ngay</a>
-    </div>
-</section>
-
-<!-- Products Section -->
-<section class="container my-5">
-    <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">Sản Phẩm Mới</h2>
-    <div class="row g-4">
-        @foreach (var product in Model)
-        {
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="@(100 * (@Model.IndexOf(product) % 3))">
-                <div class="card h-100">
-                    @if (@Model.IndexOf(product) < 3) // Highlight first 3 products as new
-                    {
-                        <span class="new-badge">Mới</span>
-                    }
-                    <img src="@(product.Images.FirstOrDefault()?.ImageUrl ?? "/images/no-image.png")" class="card-img-top" alt="@product.Name">
-                    <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text">@string.Format("{0:N0} VND", product.Price)</p>
-                        <a href="/products/details/@product.Id" class="btn btn-view">Xem Chi Tiết</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</section>
-
-<!-- AOS Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
-</script>

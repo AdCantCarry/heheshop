@@ -1,37 +1,170 @@
-@model List<heheshop.Models.Product>
+@model IEnumerable<heheshop.Models.Product>
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Quản lý sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<h2>Danh sách sản phẩm</h2>
 
-<a href="/AdminProduct/Create" class="btn btn-primary mb-3">Thêm sản phẩm</a>
+<!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="~/css/product.css" />
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-white mb-4 text-center" data-aos="fade-down">📦 Quản lý sản phẩm</h2>
+            
+            <!-- Success/Error Messages -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success-custom alert-dismissible fade show" role="alert" data-aos="fade-in">
+                    <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger-custom alert-dismissible fade show" role="alert" data-aos="fade-in">
+                    <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                </div>
+            }
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Tên</th>
-            <th>Giá</th>
-            <th>Kho</th>
-            <th>Thương hiệu</th>
-            <th>Danh mục</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model)
-        {
-            <tr>
-                <td>@p.Name</td>
-                <td>@p.Price.ToString("N0")</td>
-                <td>@p.Stock</td>
-                <td>@p.Brand?.Name</td>
-                <td>@p.Category?.Name</td>
-                <td>
-                    <a href="/AdminProduct/Edit/@p.Id" class="btn btn-sm btn-warning">Sửa</a>
-                    <a href="/AdminProduct/Delete/@p.Id" class="btn btn-sm btn-danger" onclick="return confirm('Xóa sản phẩm này?')">Xóa</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <!-- Add Product Button -->
+            <div class="text-center mb-4" data-aos="fade-up">
+                <a asp-action="Create" class="btn btn-primary-custom btn-lg rounded-pill">
+                    <i class="fas fa-plus"></i> Thêm sản phẩm mới
+                </a>
+            </div>
+
+            <!-- Products Card -->
+            <div class="card-glass" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-glass">
+                                <thead>
+                                    <tr>
+                                        <th width="80">ID</th>
+                                        <th width="100">Ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th width="120">Giá</th>
+                                        <th width="80">Tồn kho</th>
+                                        <th width="120">Thương hiệu</th>
+                                        <th width="120">Danh mục</th>
+                                        <th width="150">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(item.ThumbnailUrl))
+                                                {
+                                                    <img src="@item.ThumbnailUrl" alt="@item.Name" 
+                                                         class="product-thumbnail">
+                                                }
+                                                else
+                                                {
+                                                    <div class="product-thumbnail-placeholder">
+                                                        <i class="fas fa-image"></i>
+                                                    </div>
+                                                }
+                                            </td>
+                                            <td>
+                                                <div class="product-info">
+                                                    <strong>@item.Name</strong>
+                                                    @if (!string.IsNullOrEmpty(item.Description))
+                                                    {
+                                                        <br><small class="text-muted-custom">@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</small>
+                                                    }
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-success">@item.Price.ToString("N0") đ</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge @(item.Stock > 10 ? "badge-success" : item.Stock > 0 ? "badge-warning" : "badge-danger")">
+                                                    @item.Stock
+                                                </span>
+                                            </td>
+                                            <td>@item.Brand?.Name</td>
+                                            <td>@item.Category?.Name</td>
+                                            <td>
+                                                <div class="btn-group-custom">
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" 
+                                                       class="btn btn-edit-custom" title="Sửa">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@item.Id" 
+                                                       class="btn btn-delete-custom" title="Xóa">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state" data-aos="fade-up">
+                            <i class="fas fa-box-open fa-4x mb-3"></i>
+                            <h5>Chưa có sản phẩm nào</h5>
+                            <p class="text-muted-custom">Hãy thêm sản phẩm đầu tiên để bắt đầu</p>
+                            <a asp-action="Create" class="btn btn-primary-custom">
+                                <i class="fas fa-plus"></i> Thêm sản phẩm đầu tiên
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .card-glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 1.5rem 0; /* Thêm margin để tránh chồng lấn */
+    overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+}
+.alert-success-custom {
+    background: rgba(40, 167, 69, 0.25);
+    border: 1px solid rgba(40, 167, 69, 0.4);
+    color: #ffffff;
+    border-radius: 1.5rem;
+    backdrop-filter: blur(15px);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.alert-danger-custom {
+    background: rgba(220, 53, 69, 0.25);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #ffffff;
+    border-radius: 1.5rem;
+    backdrop-filter: blur(15px);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+</style>
+<!-- AOS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+</script>

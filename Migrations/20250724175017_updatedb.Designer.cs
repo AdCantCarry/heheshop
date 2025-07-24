@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using heheshop.Data;
 
@@ -11,9 +12,11 @@ using heheshop.Data;
 namespace heheshop.Migrations
 {
     [DbContext(typeof(HeheDbContext))]
-    partial class HeheDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250724175017_updatedb")]
+    partial class updatedb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

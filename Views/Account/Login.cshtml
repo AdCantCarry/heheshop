@@ -3,27 +3,92 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-5" style="max-width: 500px;">
-    <h2 class="mb-4">Đăng nhập</h2>
+<div class="container mt-5">
+    <div class="login-box mx-auto" style="max-width: 500px;">
+        <h2 class="mb-4 text-center">Đăng nhập</h2>
 
-    @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-danger">@ViewBag.Error</div>
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+        }
+
+        <form asp-action="Login" method="post">
+            <div class="mb-3">
+                <label class="form-label">Tên đăng nhập</label>
+                <input name="username" class="form-control" placeholder="Nhập tên đăng nhập" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu</label>
+                <input name="password" class="form-control" type="password" placeholder="Nhập mật khẩu" required />
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 mb-3">Đăng nhập</button>
+        </form>
+
+        <div class="text-center">
+            <a href="/Account/Register" class="register-link">Chưa có tài khoản? Đăng ký ngay</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .login-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    <form asp-action="Login" method="post">
-        <div class="mb-3">
-            <label class="form-label">Tên đăng nhập</label>
-            <input name="username" class="form-control" />
-        </div>
+    .login-box .form-label {
+        color: #ffffff;
+        font-weight: 500;
+    }
 
-        <div class="mb-3">
-            <label class="form-label">Mật khẩu</label>
-            <input name="password" class="form-control" type="password" />
-        </div>
+    .login-box .form-control {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #1a1a1a;
+        border: 1px solid #ced4da;
+        border-radius: 0.5rem;
+        transition: border-color 0.3s ease;
+    }
 
-        <button type="submit" class="btn btn-success w-100">Đăng nhập</button>
-    </form>
-</div>
-<div class="text-center mt-3">
-    <a href="/Account/Register">Chưa có tài khoản? Đăng ký ngay</a>
+    .login-box .form-control:focus {
+        border-color: #a3bffa;
+        box-shadow: 0 0 5px rgba(163, 191, 250, 0.5);
+    }
+
+    .login-box .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .login-box .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        transform: translateY(-2px);
+    }
+
+    .register-link {
+        color: #a3bffa;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .register-link:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    media (max-width: 576px) {
+        .login-box {
+            padding: 1.5rem;
+        }
+    }
+</style>

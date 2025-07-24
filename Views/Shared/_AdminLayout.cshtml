@@ -1,95 +1,97 @@
-@*
-    File: Views/Shared/_AdminLayout.cshtml
-*@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewData["Title"] - Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - HeheShop Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background: radial-gradient(circle at top, #090979, #020024);
+            color: #ffffff;
+            min-height: 100vh;
         }
 
         .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            width: 250px;
             height: 100vh;
-            width: 70px;
-            background-color: #343a40;
-            transition: width 0.3s;
-            overflow-x: hidden;
-            z-index: 1000;
-        }
-
-        .sidebar:hover {
-            width: 220px;
+            position: fixed;
+            padding: 1rem;
+            z-index: 1000; /* Ensure sidebar is above content */
         }
 
         .sidebar .nav-link {
-            color: #fff;
-            padding: 1rem;
-            white-space: nowrap;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Ensure clickable */
         }
 
         .sidebar .nav-link:hover {
-            background-color: #495057;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #a3bffa;
         }
 
-        .sidebar i {
+        .sidebar .nav-link i {
+            margin-right: 0.5rem;
             font-size: 1.2rem;
         }
 
-        .sidebar span {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .sidebar:hover span {
-            opacity: 1;
-        }
-
-        .main-content {
-            margin-left: 70px;
-            transition: margin-left 0.3s;
+        .content {
+            margin-left: 250px;
             padding: 2rem;
         }
 
-        .sidebar:hover~.main-content {
-            margin-left: 220px;
+        .media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .content {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
-
 <body>
-
-    <div class="sidebar d-flex flex-column">
-        <a href="/AdminDashboard" class="nav-link"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
-        <a href="/AdminProduct" class="nav-link"><i class="bi bi-box-seam"></i><span>Sản phẩm</span></a>
-         <a href="/AdminBrand" class="nav-link"><i class="bi bi-box-seam"></i><span>Brand</span></a>
-        <a href="/AdminOrder" class="nav-link"><i class="bi bi-receipt"></i><span>Đơn hàng</span></a>
-        <a href="/AdminUser" class="nav-link"><i class="bi bi-people"></i><span>Người dùng</span></a>
-        <a href="/AdminReport" class="nav-link"><i class="bi bi-graph-up"></i><span>Thống kê</span></a>
-        <a href="/logout" class="nav-link mt-auto"><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></a>
-
+    <div class="d-flex">
+        <div class="sidebar d-flex flex-column">
+            <a href="/Admin/Dashboard" class="nav-link"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
+            <a href="/AdminProduct" class="nav-link"><i class="bi bi-box-seam"></i><span>Sản phẩm</span></a>
+            <a href="/AdminBrand" class="nav-link"><i class="bi bi-award"></i><span>Brand</span></a>
+            <a href="/AdminCategory" class="nav-link"><i class="bi bi-tags"></i><span>Danh mục</span></a>
+            <a href="/AdminOrder" class="nav-link"><i class="bi bi-receipt"></i><span>Đơn hàng</span></a>
+            <a href="/AdminUser" class="nav-link"><i class="bi bi-people"></i><span>Người dùng</span></a>
+            <a href="/AdminReport" class="nav-link"><i class="bi bi-graph-up"></i><span>Thống kê</span></a>
+            <a href="/" class="nav-link"><i class="bi bi-house-door"></i><span>Trở về trang chủ</span></a>
+            <a href="/account/logout" class="nav-link mt-auto logout-link"><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></a>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
     </div>
-
-    <div class="main-content">
-        @RenderBody()
-    </div>
-
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.logout-link').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (window.confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                        window.location.href = '/account/logout';
+                    }
+                });
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-

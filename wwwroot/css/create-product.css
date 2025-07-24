@@ -1,0 +1,250 @@
+/* wwwroot/css/create-product.css */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container Styling */
+.container.mt-5 {
+    padding: 2rem;
+    max-width: 1400px; /* Giới hạn chiều rộng tối đa */
+}
+
+/* Card Glass Effect */
+
+
+.card-glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+    padding: 2.5rem;
+}
+
+/* Form Labels */
+.form-label-custom {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.form-label-custom i {
+    margin-right: 0.75rem;
+    color: #a3bffa;
+}
+
+/* Form Inputs and Selects */
+
+
+.form-control-custom:focus, .form-select-custom:focus {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.3);
+    color: #ffffff;
+}
+
+.form-control-custom::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.95rem;
+}
+
+.form-select-custom option {
+    background: #2d3748;
+    color: #ffffff;
+    padding: 0.5rem;
+}
+
+/* Input Group */
+.input-group-custom {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.input-group-custom .form-control-custom {
+    border-radius: 0.75rem 0 0 0.75rem;
+    border-right: none;
+}
+
+/* File Upload */
+.file-upload-wrapper {
+    position: relative;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 0.75rem;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.file-upload-wrapper:hover {
+    border-color: #007bff;
+    background: rgba(0, 123, 255, 0.12);
+}
+
+.form-control-file-custom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-label {
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-upload-label i {
+    font-size: 2.5rem;
+    color: #a3bffa;
+}
+
+.file-upload-preview {
+    margin-top: 1.5rem;
+}
+
+.file-upload-preview img {
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 0.75rem;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.file-upload-preview img:hover {
+    transform: scale(1.05);
+}
+
+.form-text-custom {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+/* Divider */
+.divider-custom {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 2.5rem 0;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: linear-gradient(45deg, #007bff, #6610f2);
+    border: none;
+    color: white;
+    padding: 0.85rem 2.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary-custom:hover {
+    background: linear-gradient(45deg, #0056b3, #520dc2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.5);
+    color: white;
+}
+
+
+
+.btn-secondary-custom:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+
+
+.alert .btn-close {
+    filter: invert(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container.mt-5 {
+        padding: 1.5rem;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .form-label-custom {
+        font-size: 1rem;
+    }
+
+    .form-control-custom, .form-select-custom {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .input-group-text-custom {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .file-upload-wrapper {
+        padding: 2rem;
+    }
+
+    .file-upload-label i {
+        font-size: 2rem;
+    }
+
+    .file-upload-preview img {
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-primary-custom, .btn-secondary-custom {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .form-control-custom, .form-select-custom {
+        font-size: 0.9rem;
+    }
+
+    .file-upload-wrapper {
+        padding: 1.5rem;
+    }
+
+    .file-upload-label span {
+        font-size: 0.9rem;
+    }
+}

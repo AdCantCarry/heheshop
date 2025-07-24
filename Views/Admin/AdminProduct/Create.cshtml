@@ -4,91 +4,221 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Thêm sản phẩm mới</h2>
+<!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<form asp-action="Create" enctype="multipart/form-data" method="post">
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Tên sản phẩm</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<!-- Liên kết CSS -->
+<link rel="stylesheet" href="~/css/create-product.css" />
+
+<div class="container-fluid mt-5"> <!-- Thay container bằng container-fluid -->
+    <div class="row justify-content-center">
+        <div class="col-12"> <!-- Thay col-lg-8 bằng col-12 để full-width -->
+            <h2 class="text-white mb-4 text-center" data-aos="fade-down">➕ Thêm sản phẩm mới</h2>
+            
+            <div class="card-glass" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-body">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger-custom"></div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4" data-aos="fade-up" data-aos-delay="300">
+                                <label asp-for="Name" class="form-label-custom">
+                                    <i class="fas fa-tag"></i> Tên sản phẩm <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="Name" class="form-control-custom" placeholder="Nhập tên sản phẩm" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4" data-aos="fade-up" data-aos-delay="400">
+                                <label asp-for="Description" class="form-label-custom">
+                                    <i class="fas fa-align-left"></i> Mô tả sản phẩm
+                                </label>
+                                <textarea asp-for="Description" class="form-control-custom" rows="5" 
+                                          placeholder="Nhập mô tả chi tiết về sản phẩm"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                                <label asp-for="Price" class="form-label-custom">
+                                    <i class="fas fa-dollar-sign"></i> Giá bán <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group-custom">
+                                    <input asp-for="Price" class="form-control-custom" type="number" step="1000" min="0" 
+                                           placeholder="0" />
+                                    <span class="input-group-text-custom">VNĐ</span>
+                                </div>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="600">
+                                <label asp-for="Stock" class="form-label-custom">
+                                    <i class="fas fa-boxes"></i> Số lượng tồn kho <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="Stock" class="form-control-custom" type="number" min="0" 
+                                       placeholder="0" />
+                                <span asp-validation-for="Stock" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="700">
+                                <label asp-for="BrandId" class="form-label-custom">
+                                    <i class="fas fa-trademark"></i> Thương hiệu <span class="text-danger">*</span>
+                                </label>
+                                <select asp-for="BrandId" class="form-select-custom" asp-items="ViewBag.Brands">
+                                    <option value="">-- Chọn thương hiệu --</option>
+                                </select>
+                                <span asp-validation-for="BrandId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="800">
+                                <label asp-for="CategoryId" class="form-label-custom">
+                                    <i class="fas fa-list"></i> Danh mục <span class="text-danger">*</span>
+                                </label>
+                                <select asp-for="CategoryId" class="form-select-custom" asp-items="ViewBag.Categories">
+                                    <option value="">-- Chọn danh mục --</option>
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4" data-aos="fade-up" data-aos-delay="900">
+                                <label class="form-label-custom">
+                                    <i class="fas fa-image"></i> Ảnh đại diện sản phẩm
+                                </label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" name="thumbnail" class="form-control-file-custom" accept="image/*" id="thumbnailInput" />
+                                    <label for="thumbnailInput" class="file-upload-label">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <span>Chọn ảnh hoặc kéo thả vào đây</span>
+                                    </label>
+                                    <div class="file-upload-preview" id="imagePreview"></div>
+                                </div>
+                                <div class="form-text-custom">Chọn file ảnh (JPG, PNG, GIF). Kích thước tối đa: 5MB</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="1000">
+                                <hr class="divider-custom">
+                                <div class="d-flex justify-content-between">
+                                    <a asp-action="Index" class="btn btn-secondary-custom">
+                                        <i class="fas fa-arrow-left"></i> Quay lại
+                                    </a>
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="fas fa-save"></i> Lưu sản phẩm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label">Mô tả</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Price" class="form-label">Giá</label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Stock" class="form-label">Tồn kho</label>
-        <input asp-for="Stock" class="form-control" />
-        <span asp-validation-for="Stock" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Thumbnail</label>
-        <input type="file" name="thumbnailFile" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Ảnh chi tiết</label>
-        <input type="file" name="imageFiles" multiple class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="BrandId" class="form-label">Thương hiệu</label>
-        <select asp-for="BrandId" asp-items="@(new SelectList(ViewBag.Brands, "Id", "Name"))" class="form-select">
-            <option value="">-- Chọn thương hiệu --</option>
-        </select>
-        <span asp-validation-for="BrandId" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="CategoryId" class="form-label">Danh mục</label>
-        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" class="form-select">
-            <option value="">-- Chọn danh mục --</option>
-        </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
-    </div>
-
-    <hr />
-    <h5>Biến thể sản phẩm (Size & Color)</h5>
-    <div id="variantContainer"></div>
-    <button type="button" class="btn btn-secondary mb-3" onclick="addVariant()">+ Thêm biến thể</button>
-
-    <button type="submit" class="btn btn-primary">Lưu</button>
-</form>
+</div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
     <script>
-        function addVariant() {
-            const container = document.getElementById('variantContainer');
-            const index = container.children.length;
-
-            const variantDiv = document.createElement('div');
-            variantDiv.className = 'mb-3 row';
-
-            variantDiv.innerHTML = `
-                <div class="col-md-3">
-                    <input name="Variants[${index}].Size" class="form-control" placeholder="Size" />
-                </div>
-                <div class="col-md-3">
-                    <input name="Variants[${index}].Color" class="form-control" placeholder="Màu" />
-                </div>
-                <div class="col-md-3">
-                    <input name="Variants[${index}].Stock" type="number" class="form-control" placeholder="Số lượng" />
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-danger" onclick="this.parentElement.parentElement.remove()">X</button>
-                </div>
-            `;
-            container.appendChild(variantDiv);
-        }
+        // Preview ảnh khi chọn file
+        document.getElementById('thumbnailInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        });
     </script>
 }
+<style>
+    /* Alerts */
+.alert-success-custom {
+    background: rgba(40, 167, 69, 0.25);
+    border: 1px solid rgba(40, 167, 69, 0.4);
+    color: #ffffff;
+    border-radius: 1.5rem;
+    backdrop-filter: blur(15px);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.alert-danger-custom {
+    background: rgba(220, 53, 69, 0.25);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #ffffff;
+    border-radius: 1.5rem;
+    backdrop-filter: blur(15px);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.btn-secondary-custom {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.85rem 2.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(15px);
+}
+.card-glass {
+     width: 100% !important;* Đảm bảo card chiếm toàn bộ chiều rộng của cột */
+    max-width: none; /* Loại bỏ giới hạn max-width nếu có */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 1.5rem 0; /* Ngăn chồng lấn */
+    overflow: hidden;
+}
+.form-control-custom, .form-select-custom {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.75rem;
+    color: #ffffff;
+    padding: 0.85rem 1.25rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    font-size: 1rem;
+}
+.input-group-text-custom {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: none;
+    color: #ffffff;
+    padding: 0.85rem 1.25rem;
+    border-radius: 0 0.75rem 0.75rem 0;
+    backdrop-filter: blur(15px);
+    font-size: 0.95rem;
+}
+</style>
+<!-- AOS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+</script>

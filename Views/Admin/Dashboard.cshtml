@@ -1,23 +1,28 @@
+@model dynamic
+
 @{
     ViewData["Title"] = "Admin Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container mt-5">
-    <h2 class="text-white mb-4">👑 Admin Dashboard</h2>
+<!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-    <div class="row text-center">
-        <div class="col-md-4 mb-4">
-            <div class="card bg-dark text-white shadow">
+<div class="container mt-5">
+    <h2 class="text-white mb-4 text-center" data-aos="fade-down">👑 Admin Dashboard</h2>
+
+    <div class="row text-center g-4">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 shadow border-0">
                 <div class="card-body">
-                    <h5 class="card-title">Người dùng</h5>
+                    <h5 class="card-title">Người&nbsp;dùng</h5>
                     <p class="display-5">@ViewBag.TotalUsers</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
-            <div class="card bg-dark text-white shadow">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 shadow border-0">
                 <div class="card-body">
                     <h5 class="card-title">Đơn hàng</h5>
                     <p class="display-5">@ViewBag.TotalOrders</p>
@@ -25,8 +30,8 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-4">
-            <div class="card bg-dark text-white shadow">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100 shadow border-0">
                 <div class="card-body">
                     <h5 class="card-title">Sản phẩm</h5>
                     <p class="display-5">@ViewBag.TotalProducts</p>
@@ -35,7 +40,88 @@
         </div>
     </div>
 
-    <div class="mt-5 text-center">
-        <a href="/Admin/AdminProduct" class="btn btn-light btn-lg rounded-pill">Quản lý sản phẩm</a>
+    <div class="mt-5 text-center" data-aos="fade-up" data-aos-delay="400">
+        <a href="/Admin/AdminProduct" class="btn btn-view btn-lg rounded-pill">Quản lý sản phẩm</a>
     </div>
 </div>
+
+<style>
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    .display-5 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #a3bffa;
+    }
+
+    .btn-view {
+        background-color: #0d6efd;
+        color: #ffffff;
+        border-radius: 2rem;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-view:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-2px);
+    }
+
+    media (max-width: 768px) {
+        .card-title {
+            font-size: 1.1rem;
+        }
+
+        .display-5 {
+            font-size: 2rem;
+        }
+
+        .btn-view {
+            padding: 0.5rem 1.5rem;
+        }
+    }
+
+    media (max-width: 576px) {
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .display-5 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<!-- AOS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+</script>
