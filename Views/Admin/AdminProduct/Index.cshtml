@@ -99,10 +99,12 @@
                                                        class="btn btn-edit-custom" title="Sửa">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a asp-action="Delete" asp-route-id="@item.Id" 
-                                                       class="btn btn-delete-custom" title="Xóa">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+                                                   <a asp-action="Delete" asp-route-id="@item.Id"
+   onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này không?');"
+   class="btn btn-sm btn-danger">
+   Xóa
+</a>
+
                                                 </div>
                                             </td>
                                         </tr>

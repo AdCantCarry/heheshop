@@ -3,83 +3,44 @@
     ViewData["Title"] = "Thêm sản phẩm";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<!-- AOS CSS -->
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Liên kết CSS -->
-<link rel="stylesheet" href="~/css/create-product.css" />
-
-<div class="container-fluid mt-5"> <!-- Thay container bằng container-fluid -->
+<div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-12"> <!-- Thay col-lg-8 bằng col-12 để full-width -->
+        <div class="col-lg-10">
             <h2 class="text-white mb-4 text-center" data-aos="fade-down">➕ Thêm sản phẩm mới</h2>
-            
+
             <div class="card-glass" data-aos="fade-up" data-aos-delay="200">
                 <div class="card-body">
                     <form asp-action="Create" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger-custom"></div>
 
-                        <div class="row">
-                            <div class="col-md-12 mb-4" data-aos="fade-up" data-aos-delay="300">
-                                <label asp-for="Name" class="form-label-custom">
-                                    <i class="fas fa-tag"></i> Tên sản phẩm <span class="text-danger">*</span>
-                                </label>
+                        <div class="row form-row-custom">
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                                <label asp-for="Name" class="form-label-custom"><i class="fas fa-tag"></i> Tên sản phẩm <span class="text-danger">*</span></label>
                                 <input asp-for="Name" class="form-control-custom" placeholder="Nhập tên sản phẩm" />
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12 mb-4" data-aos="fade-up" data-aos-delay="400">
-                                <label asp-for="Description" class="form-label-custom">
-                                    <i class="fas fa-align-left"></i> Mô tả sản phẩm
-                                </label>
-                                <textarea asp-for="Description" class="form-control-custom" rows="5" 
-                                          placeholder="Nhập mô tả chi tiết về sản phẩm"></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                                <label asp-for="Stock" class="form-label-custom"><i class="fas fa-boxes"></i> Số lượng tồn kho <span class="text-danger">*</span></label>
+                                <input asp-for="Stock" class="form-control-custom" type="number" min="0" placeholder="0" />
+                                <span asp-validation-for="Stock" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row form-row-custom">
                             <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
-                                <label asp-for="Price" class="form-label-custom">
-                                    <i class="fas fa-dollar-sign"></i> Giá bán <span class="text-danger">*</span>
-                                </label>
+                                <label asp-for="Price" class="form-label-custom"><i class="fas fa-dollar-sign"></i> Giá bán <span class="text-danger">*</span></label>
                                 <div class="input-group-custom">
-                                    <input asp-for="Price" class="form-control-custom" type="number" step="1000" min="0" 
-                                           placeholder="0" />
+                                    <input asp-for="Price" class="form-control-custom" type="number" step="1000" min="0" placeholder="0" />
                                     <span class="input-group-text-custom">VNĐ</span>
                                 </div>
                                 <span asp-validation-for="Price" class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="600">
-                                <label asp-for="Stock" class="form-label-custom">
-                                    <i class="fas fa-boxes"></i> Số lượng tồn kho <span class="text-danger">*</span>
-                                </label>
-                                <input asp-for="Stock" class="form-control-custom" type="number" min="0" 
-                                       placeholder="0" />
-                                <span asp-validation-for="Stock" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="700">
-                                <label asp-for="BrandId" class="form-label-custom">
-                                    <i class="fas fa-trademark"></i> Thương hiệu <span class="text-danger">*</span>
-                                </label>
-                                <select asp-for="BrandId" class="form-select-custom" asp-items="ViewBag.Brands">
-                                    <option value="">-- Chọn thương hiệu --</option>
-                                </select>
-                                <span asp-validation-for="BrandId" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="800">
-                                <label asp-for="CategoryId" class="form-label-custom">
-                                    <i class="fas fa-list"></i> Danh mục <span class="text-danger">*</span>
-                                </label>
+                                <label asp-for="CategoryId" class="form-label-custom"><i class="fas fa-list"></i> Danh mục <span class="text-danger">*</span></label>
                                 <select asp-for="CategoryId" class="form-select-custom" asp-items="ViewBag.Categories">
                                     <option value="">-- Chọn danh mục --</option>
                                 </select>
@@ -87,11 +48,25 @@
                             </div>
                         </div>
 
+                        <div class="row form-row-custom">
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="700">
+                                <label asp-for="BrandId" class="form-label-custom"><i class="fas fa-trademark"></i> Thương hiệu <span class="text-danger">*</span></label>
+                                <select asp-for="BrandId" class="form-select-custom" asp-items="ViewBag.Brands">
+                                    <option value="">-- Chọn thương hiệu --</option>
+                                </select>
+                                <span asp-validation-for="BrandId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="800">
+                                <label asp-for="Description" class="form-label-custom"><i class="fas fa-align-left"></i> Mô tả sản phẩm</label>
+                                <textarea asp-for="Description" class="form-control-custom" rows="4" placeholder="Nhập mô tả chi tiết sản phẩm"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12 mb-4" data-aos="fade-up" data-aos-delay="900">
-                                <label class="form-label-custom">
-                                    <i class="fas fa-image"></i> Ảnh đại diện sản phẩm
-                                </label>
+                                <label class="form-label-custom"><i class="fas fa-image"></i> Ảnh đại diện sản phẩm</label>
                                 <div class="file-upload-wrapper">
                                     <input type="file" name="thumbnail" class="form-control-file-custom" accept="image/*" id="thumbnailInput" />
                                     <label for="thumbnailInput" class="file-upload-label">
@@ -100,13 +75,13 @@
                                     </label>
                                     <div class="file-upload-preview" id="imagePreview"></div>
                                 </div>
-                                <div class="form-text-custom">Chọn file ảnh (JPG, PNG, GIF). Kích thước tối đa: 5MB</div>
+                                <div class="form-text-custom">Chọn ảnh JPG, PNG, GIF. Tối đa: 5MB</div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-12" data-aos="fade-up" data-aos-delay="1000">
-                                <hr class="divider-custom">
+                                <hr class="divider-custom" />
                                 <div class="d-flex justify-content-between">
                                     <a asp-action="Index" class="btn btn-secondary-custom">
                                         <i class="fas fa-arrow-left"></i> Quay lại
@@ -126,16 +101,16 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        // Preview ảnh khi chọn file
-        document.getElementById('thumbnailInput').addEventListener('change', function(e) {
+        AOS.init({ duration: 1000, once: true, offset: 100 });
+
+        document.getElementById('thumbnailInput').addEventListener('change', function (e) {
             const file = e.target.files[0];
             const preview = document.getElementById('imagePreview');
-            
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
                 };
                 reader.readAsDataURL(file);
@@ -145,80 +120,97 @@
         });
     </script>
 }
-<style>
-    /* Alerts */
-.alert-success-custom {
-    background: rgba(40, 167, 69, 0.25);
-    border: 1px solid rgba(40, 167, 69, 0.4);
-    color: #ffffff;
-    border-radius: 1.5rem;
-    backdrop-filter: blur(15px);
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-}
 
-.alert-danger-custom {
-    background: rgba(220, 53, 69, 0.25);
-    border: 1px solid rgba(220, 53, 69, 0.4);
-    color: #ffffff;
-    border-radius: 1.5rem;
-    backdrop-filter: blur(15px);
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-}
-.btn-secondary-custom {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 0.85rem 2.5rem;
-    border-radius: 2rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    backdrop-filter: blur(15px);
-}
-.card-glass {
-     width: 100% !important;* Đảm bảo card chiếm toàn bộ chiều rộng của cột */
-    max-width: none; /* Loại bỏ giới hạn max-width nếu có */
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 1.5rem 0; /* Ngăn chồng lấn */
-    overflow: hidden;
-}
-.form-control-custom, .form-select-custom {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 0.75rem;
-    color: #ffffff;
-    padding: 0.85rem 1.25rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(15px);
-    font-size: 1rem;
-}
-.input-group-text-custom {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-left: none;
-    color: #ffffff;
-    padding: 0.85rem 1.25rem;
-    border-radius: 0 0.75rem 0.75rem 0;
-    backdrop-filter: blur(15px);
-    font-size: 0.95rem;
-}
+<style>
+    .row.form-row-custom {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .row.form-row-custom > .col-md-6 {
+        flex: 1 1 calc(50% - 10px);
+        min-width: 300px;
+    }
+    .card-glass {
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(15px);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .form-label-custom {
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .form-control-custom, .form-select-custom {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 0.5rem;
+        color: white;
+        padding: 0.75rem 1rem;
+    }
+    .form-control-custom::placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+    .input-group-custom {
+        display: flex;
+    }
+    .input-group-text-custom {
+        background: rgba(255,255,255,0.1);
+        color: white;
+        padding: 0.75rem 1rem;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .btn-primary-custom, .btn-secondary-custom {
+        padding: 0.75rem 2rem;
+        border-radius: 2rem;
+        font-weight: bold;
+        border: none;
+    }
+    .btn-primary-custom {
+        background: linear-gradient(45deg, #007bff, #6610f2);
+        color: white;
+    }
+    .btn-primary-custom:hover {
+        background: linear-gradient(45deg, #0056b3, #520dc2);
+        transform: translateY(-2px);
+    }
+    .btn-secondary-custom {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        border: 1px solid white;
+    }
+    .file-upload-wrapper {
+        position: relative;
+        border: 2px dashed rgba(255,255,255,0.3);
+        padding: 2rem;
+        text-align: center;
+        border-radius: 0.75rem;
+    }
+    .form-control-file-custom {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .file-upload-label {
+        cursor: pointer;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .file-upload-preview img {
+        max-width: 200px;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+        border: 2px solid rgba(255,255,255,0.2);
+    }
+    .divider-custom {
+        border: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
 </style>
-<!-- AOS Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
-</script>

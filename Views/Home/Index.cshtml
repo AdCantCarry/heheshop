@@ -13,7 +13,6 @@
         background: radial-gradient(circle at top, #090979, #020024);
     }
 
-    /* Hero Section */
     .hero-section {
         position: relative;
         min-height: 70vh;
@@ -36,7 +35,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.3); /* Subtle overlay for depth */
+        background: rgba(0, 0, 0, 0.3);
         border-radius: 1rem;
     }
 
@@ -75,7 +74,6 @@
         transform: translateY(-3px);
     }
 
-    /* Section Title */
     .section-title {
         font-size: 2.5rem;
         font-weight: 700;
@@ -85,7 +83,6 @@
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
 
-    /* Product Cards */
     .card {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(12px);
@@ -104,6 +101,7 @@
     .card-img-top {
         height: 250px;
         object-fit: cover;
+        width: 100%;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -139,7 +137,6 @@
         transform: translateY(-2px);
     }
 
-    /* New Product Badge */
     .new-badge {
         position: absolute;
         top: 10px;
@@ -153,7 +150,6 @@
         z-index: 10;
     }
 
-    /* Responsive Design */
     media (max-width: 768px) {
         .hero-section {
             min-height: 50vh;
@@ -205,15 +201,16 @@
 <section class="container my-5">
     <h2 class="section-title" data-aos="fade-up" data-aos-duration="1000">Sản Phẩm Mới</h2>
     <div class="row g-4">
-        @foreach (var product in Model)
+        @for (int i = 0; i < Model.Count; i++)
         {
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="@(100 * (@Model.IndexOf(product) % 3))">
+            var product = Model[i];
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="@(100 * (i % 3))">
                 <div class="card h-100">
-                    @if (@Model.IndexOf(product) < 3) // Highlight first 3 products as new
+                    @if (i < 3)
                     {
                         <span class="new-badge">Mới</span>
                     }
-                    <img src="@(product.Images.FirstOrDefault()?.ImageUrl ?? "/images/no-image.png")" class="card-img-top" alt="@product.Name">
+                    <img src="@(product.Images.FirstOrDefault()?.ImageUrl ?? "/images/no-image.png")" alt="@product.Name" class="card-img-top" />
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
                         <p class="card-text">@string.Format("{0:N0} VND", product.Price)</p>
